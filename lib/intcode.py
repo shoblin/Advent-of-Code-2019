@@ -11,7 +11,7 @@
 
 class Computer:
     '''
-    Class of Amplifiers
+    Class of Computer
     Attributes:
         position - position of execute code
         memory - list of intcode
@@ -20,6 +20,8 @@ class Computer:
         base - posirion for relative mode
         input - list with inputs
     '''
+
+    ## Initialisate class attibutes
     def __init__ (self, data):
         self.position = 0
         self.memory = data[:] + [0] * 3000
@@ -28,9 +30,11 @@ class Computer:
         self.base = 0
         self.inputs = []
 
+
     def get_params(self, mode1, mode2, mode3):
         '''Take two modes of two parametrs and return values of parametrs'''
         return self.get_param(mode1, 1), self.get_param(mode2, 2),  self.get_param(mode3, 3)
+
 
     def get_param(self, mode, increment):
         '''
@@ -46,6 +50,7 @@ class Computer:
             return self.position + increment
         elif mode == 2:
             return self.memory[self.position + increment] + self.base
+
 
     def check_instruction(self, current_opcode):
         '''
@@ -70,6 +75,7 @@ class Computer:
             instruction_full[-4] = int(current_opcode[-5])
 
         return instruction_full
+
 
     def calculate(self, input_val = None):
         if input_val is not None: self.inputs.append(input_val)
@@ -143,5 +149,6 @@ class Computer:
 ##                print('END')
                 break
 
+            # Error - we have unknown opcode
             else:
                 raise ValueError(f'ERRRRR... p: {self.position}, op: {digit_opcode}, v: {self.memory[self.position]}')
