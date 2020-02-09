@@ -33,7 +33,7 @@ def next_step(lst):
     return True
 
 def main():
-    opcode_list = fa.read_input_values('data\\day7_puzzle_input.txt')
+    opcode_list = fa.read_input_values('day7_puzzle_input.txt')
     opcode_list = [int(thing) for thing in opcode_list]
 
     ls = [x for x in range(5)]

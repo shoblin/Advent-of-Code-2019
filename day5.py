@@ -37,7 +37,7 @@ def check_instruction(current_opcode):
 
 def main():
     current_position = 0
-    opcode_list = fa.read_input_values('data\\day5_puzzle_input.txt')
+    opcode_list = fa.read_input_values('day5_puzzle_input.txt')
     opcode_list = [int(thing) for thing in opcode_list]
 
     computer = Computer(opcode_list)

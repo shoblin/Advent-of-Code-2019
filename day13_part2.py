@@ -9,7 +9,7 @@
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
 from lib.intcode import Computer
-import functions_au as fa
+import lib.functions_au as fa
 
 def draw_screen(game_map):
     for row in game_map:

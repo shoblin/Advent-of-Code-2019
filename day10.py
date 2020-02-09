@@ -96,7 +96,7 @@ def create_dict_asteroids(monitor_station, map_list):
     return angles, sort_dict
 
 def main():
-    task_list = au.reed_maps('day10_puzzle_input.txt')
+    task_list = au.reed_maps('data//day10_puzzle_input.txt')
     asts_cord = take_ast_coordinates(task_list)
 
     result_dict = {}
@@ -104,7 +104,7 @@ def main():
         result_dict[ast_cord] = count_visible_ast(ast_cord,asts_cord)
 
     best_cord = find_best_ast(result_dict)
-    print (best_cord, max(result_dict.values()))
+    print ('Part1: ', max(result_dict.values()))
 
     asts_cord.remove(best_cord)
 
@@ -114,7 +114,6 @@ def main():
     while cnt <200:
         result_cord = dict_asteroids[angels[idx]]
         result_cord = result_cord.pop(0)
-        print(result_cord)
         cnt += 1
         if len(dict_asteroids[angels[idx]]) <= 0:
 
@@ -125,18 +124,7 @@ def main():
         if idx > len(angels):
             idx = 0
 
-    print(result_cord)
-
-##    angles = sorted(
-##        ((angle(best_cord, end), end) for end in asts_cord),
-##       )
-##
-##
-##    print(angles)
-
-
-
-
+    print('Part1: ', result_cord[0] * 100 + result_cord[1])
 
 if __name__ == '__main__':
     main()

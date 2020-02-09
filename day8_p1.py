@@ -15,7 +15,7 @@ def main():
     required_layer = 0
     idx = -1
 
-    with open("day8_puzzle_input.txt", "r") as file:
+    with open("data//day8_puzzle_input.txt", "r") as file:
         line = file.read()
 
     divided_text = [line[i : i + img_wide * img_tall] for i in range(0,len(line),img_wide * img_tall)]

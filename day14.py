@@ -10,6 +10,7 @@
 #-------------------------------------------------------------------------------
 import os
 import math
+import lib.functions_au as fa
 
 def needs_list(chemical, needs):
     '''
@@ -63,13 +64,13 @@ def read_input_values(file_name, num_row = 0):
 
 def main():
     # Part 1: Find number of ORE for create 1 FUEL
-    task_dict = read_input_values('day14_puzzle_input.txt')
+    task_dict = read_input_values('data//day14_puzzle_input.txt')
 ##    task_dict = read_input_values('day14_puzzle_input_test.txt')
     need_chemicals = {}
 ##    print(task_dict)
 ##    need_chemicals = {'FUEL': 1}
     result = count_ore('FUEL', 1, task_dict, need_chemicals)
-    print(result)
+    print('Part 1: ', result)
 
 
     hi = int(1e12)

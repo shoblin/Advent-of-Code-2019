@@ -24,18 +24,15 @@ def move_moons(moons):
     for moon in moons:
         moon.change()
         result += moon.total_energy
-##        print(moon.coordinates, moon.velocity )
 
     return result
 
 def lcm(a, b):
   return (a * b) // gcd(a, b)
 
-##                print(f_moon.velocity)
 def check_retunting(moons, old_positions):
     idx = 0
     for old_position in old_positions:
-##        print(old_position, '***', moons[idx].coordinates)
         if (moons[idx].coordinates[0] != old_position[0]) or (moons[idx].coordinates[1] != old_position[1]) or moons[idx].coordinates[2] != old_position[2]:
             return True
         idx +=1
@@ -75,13 +72,6 @@ def main():
                 [12, 2, -13],
                 [14, 18, -8],
                 [17, 4, -4]]
-
-
-
-##    coordinates =[[-1, 0, 2],
-##                [2, -10, -7],
-##                [4, -8, 8],
-##                [3, 5, -1]]
 
     moons = []
     for coordinate in coordinates:
