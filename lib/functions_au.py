@@ -17,7 +17,7 @@ def read_input_values(file_name, num_row = 0):
     Read values from file and input its into list
     '''
     dir = os.path.abspath(os.curdir)
-    full_name = dir + '\\' + file_name
+    full_name = dir + '\\data\\' + file_name
     with open(full_name, "r") as file:
         line = file.read().splitlines()
         list = line[num_row].split(',')

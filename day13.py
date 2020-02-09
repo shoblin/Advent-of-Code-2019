@@ -9,10 +9,10 @@
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
 from lib.intcode import Computer
-import functions_au as fa
+import lib.functions_au as fa
 
 def main():
-    opcode_list = fa.read_input_values('day13_puzzle_input.txt')
+    opcode_list = fa.read_input_values('data\\day13_puzzle_input.txt')
     opcode_list = [int(thing) for thing in opcode_list]
     computer = Computer(opcode_list)
 
