@@ -44,20 +44,33 @@ class Repair_Droid:
     def __init__(self, comp):
         self.pos = (0, 0)
         self.comp = comp
-        self.map = {}
+        self._map = {self.pos: 1}
+
+
+    def step(self, direction):
+        return (self.pos[0] + direction[0], self.pos[1] + direction[1])
+
+##    def check
+
+    def run(self):
+        for dir in self.DIR:
+            cell_position = step(dir)
+##            if cell_position in
+
 
     def look_around(self):
-        for dir in self.DIR:
+        num_walls = 0
+        for dir in range(4):
             status_code = self.comp.calculate(dir)
-            cell_position = (self.pos[0] + self.DIR[dir][0], self.pos[1] + self.DIR[dir][1])
+            cell_position = step(dir)
             if status_code == 0:
-                print(cell_position, "#")
+                num_walls += 1
+                self._map[cell_position] = 0
             if status_code == 1:
                 print(cell_position, ".")
                 self.comp.calculate(self.REV[dir])
             if status_code == 2:
                 print("YAHOO")
-
 
 
 def main():
