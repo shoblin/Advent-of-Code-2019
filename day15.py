@@ -52,8 +52,8 @@ class Repair_Droid:
         self.comp = comp
         self.cell_seen = set([self.pos])
         self.cache =[]
-
-
+        self.map = {self.pos: True}
+        self.oxygen = None
 
     def step(self, direction):
         return (self.pos[0] + self.DIR[direction][0], self.pos[1] + self.DIR[direction][1])
@@ -87,34 +87,19 @@ class Repair_Droid:
                 droid_code = self.comp.calculate(dir)
 
                 if droid_code == 0:
+                    self.map[cell_position] = False
                     continue
                 if droid_code == 1:
                     self.pos = self.step(dir)
                     self.cache.append(dir)
+                    self.map[cell_position] = True
                     break
                 if droid_code == 2:
+                    self.oxygen = cell_position
+                    self.cache.extend([dir, 0])
+                    self.map[cell_position] = True
                     print("Yahooo")
                     return
-##            print(template.format(cell_position, self.cache, self.cell_seen))
-
-
-
-
-
-##    def look_around(self):
-##        num_walls = 0
-##        for dir in range(4):
-##            status_code = self.comp.calculate(dir)
-##            cell_position = step(dir)
-##            if status_code == 0:
-##                num_walls += 1
-##                self._map[cell_position] = 0
-##            if status_code == 1:
-##                print(cell_position, ".")
-##                self.comp.calculate(self.REV[dir])
-##            if status_code == 2:
-##                print("YAHOO")
-
 
 def main():
 
