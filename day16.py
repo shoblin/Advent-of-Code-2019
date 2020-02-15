@@ -20,6 +20,17 @@ def creat_pattern(pattern, repeats):
         result += [pat] * repeats
     return result
 
+def calculate_output(input_list):
+    '''
+    Calculate output for all symbols
+    '''
+    pattern = [0, 1, 0, -1]
+    result = []
+    point = 1
+
+    for num in input_list:
+        new =
+
 
 def fft(task_str, num_phases):
     '''
@@ -27,8 +38,6 @@ def fft(task_str, num_phases):
     '''
     task_list = transform_task(task_str)
     num_str = len(task_list)
-    pattern = [0, 1, 0, -1]
-    result = []
 
     for phase in range(1, num_phases + 1):
 ##        calulate creat_pattern(pattern, phase))
