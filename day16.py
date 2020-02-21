@@ -60,8 +60,8 @@ def fft(task_str, num_phases):
     return task_list[:8]
 
 def main():
-    task_test1 = '12345678'
-    task_test2 = list('03036732577212944063491565474664')
+##    task_test1 = '12345678'
+##    task_test2 = list('03036732577212944063491565474664')
 
     task = fa.read_input_values('day16_puzzle_input.txt')
 
