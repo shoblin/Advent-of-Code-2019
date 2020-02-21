@@ -1,0 +1,195 @@
+
+Posted byu/k-o-x
+2 months ago
+[2019 Day 16 (Part 2)] - Understanding how to come up with solutions
+Help - SOLVED!
+I came up with a solution for part 1 pretty easily. I'm stuck on part 2 because my solution takes way too much time to execute.
+
+I started optimizing the solution (first ignoring the leading zeroes in patterns, then coming up with a formula to only loop over ranges of +1/-1 factors) but it's still way too slow for part 2.
+
+Looking at the solutions thread, I saw someone mentioning a recursion formula to compute the Nth digit at phase P from the Nth digit at phase P-1 and the N-1th digit at phase P , but I would like to understand how to come up with it, and I'm pretty stuck. Would you have some starting leads?
+
+Edit: thanks a lot for your insight, all of you!
+
+10 Comments
+
+Share
+
+Save
+
+Hide
+
+Report
+82% Upvoted
+Log in or sign up to leave a comment
+LOG IN
+SIGN UP
+SORT BY
+
+BEST
+
+
+level 1
+LieutenantSwr2d2
+14 points
+·
+2 months ago
+If you list out the digits and how they are summed in a table format:
+
+a	b	c	d	e	f
+a		-c		e	
+b	c		-e	-f	
+c	d	e		
+d	e	f	
+e	f	
+f	
+a	b	c	d	e	f	g	h	i	j	k	l
+a		-c		e		-g		i		-k	
+b	c		-e	-f			i	j			
+c	d	e				-i	-j	-k		
+d	e	f	g					-l	
+e	f	g	h	i				
+f	g	h	i	j	k		
+g	h	i	j	k	l	
+h	i	j	k	l	
+i	j	k	l	
+j	k	l	
+k	l	
+l	
+You can see that the second half of the digits only require at most the remaining digits summed together to find the next digit. If you know that the offset pushes what you need in the second half, perhaps you can more efficiently track the necessary digits and sum them
+
+
+
+level 1
+Arkoniak
+12 points
+·
+2 months ago
+Silver
+You should think step by step in reverse.
+
+Let's take final digit and apply phase procedure to it. In case of last digit (no matter the length of the initial string) will always look like 0, 0, ..., 0, 1 (lots of zero and one 1 at the last position). So phase procedure applied to last digit will always give this same digit , no matter the length of input sequence. So, we write down s'[end] = s[end]
+
+Let's take second from the end. It's filter will look like 0, 0, ...., 0, 1, 1. Now, you know, that new last digit equals last digit from original input, so new value for the second digit from the end will be the following: s'[end - 1] = mod(s[end - 1] + s[end], 10) = mod(s[end-1] + s'[end], 10)
+
+Next digit will have filter 0, 0, ...., 0, 1, 1, 1, so new value will be s'[end - 2] = mod(s[end - 2] + s[end - 1] + s[end], 10) = mod(s[end - 2] + s'[end - 1], 10)
+
+Here we have used following facts
+
+Digits always greater than zero, so we can use mod procedure, without applying abs to it.
+
+for all digits from the second half of the input we will always have filter in the form 0, 0, ..., 0, 1, ..., 1
+
+
+
+level 1
+paul2718
+7 points
+·
+2 months ago
+·
+edited 2 months ago
+At offset N into the string the pattern has N-1 0 then N 1, then N -1 then N 0. For part 2 the string length is 6 500 000 and the offset is (if you look) more than half that. So the output digit at N is just the sum of all the input digits between N and the end. The next output digit is the same sum but without the input digit at N, and so on.
+
+This is where the formula you've quoted comes from. If you do this from the end of the string back towards the offset you are given, each new output digit is the sum of the previous output digit in the new phase (before the mod 10 I think) and the output digit from the previous phase.
+
+So, to turn …….abcdef into …….ghijkl
+
+a+b+c+d+e+f = g = a+h
+  b+c+d+e+f = h = b+i
+    c+d+e+f = i = c+j
+      d+e+f = j = d+k
+        e+f = k = e+l
+          f = l
+where ……. is the contents of the string prior to the offset.
+
+
+
+level 2
+Comprehensive_Tone
+1 point
+·
+1 month ago
+Tried this method but still failed, probably need to revisit!
+
+
+
+level 1
+syntaxers
+5 points
+·
+2 months ago
+I think the best way to understand the solution is just to write out the operations for the example from part 1. Then, the pattern is obviously a backwards cumulative sum % 10.
+
+Input signal: 12345678
+
+1*1 + ... + 8*0 = 4
+1*0 + ... + 8*0 = 8
+1*0 + ... + 8*0 = 2
+1*0 + ... + 8*0 = 2
+1*0 + ... + 8*1 = 6 = (8 + 7 + 6 + 5) % 10
+1*0 + ... + 8*1 = 1 = (8 + 7 + 6) % 10
+1*0 + ... + 8*1 = 5 = (8 + 7) % 10
+1*0 + ... + 8*1 = 8 = (8) % 10
+
+
+level 1
+genveir
+6 points
+·
+2 months ago
+I had (and frankly, have) no idea how to solve this using math. The first thing I did was take one of the 32-character test cases and printed all 100 phase states, using my part 1 code. Don't "*10000" it. When trying to figure out a solution to a big problem, try it for a small problem first.
+
+Look for patterns in the output. You'll immediately notice that the last digits are all the same. That's something. What it tells you is that it's very likely there's a bigger pattern you can find starting from the end of the number. It's a base case. "at the last position: no change."
+
+You can test that assumption. If it's valid for all cases, it should hold for a smaller one. Take half off your number. Does the last number stay the same? (yes). Good. It should also hold for a different input. Try another one of the 32-character test cases. Is it still true? (yes).
+
+If there's a pattern to find from the end, just take a few numbers from the end and see if you can find it. In one of the test cases, the last numbers are a sequence like this: "95 45 95 45 95 45". That's clearly repeating. Try another number. "17 87 57 27 97". Hm. Not just repeating, but it's (the number at position [n] + the number at position [n+1]) % 10. Does that hold for the number in front of it? (not quite). So apparently that's not "the rule", but it's a basic case of the rule. Figure out how to expand it to make it work for other cases.
+
+In this case, doing this was enough to solve part 2.
+
+I left my "observation"-comments in my code today. You can find it here. I translated them to english at the end, since they're in dutch.
+
+As you can see I was on a little side route where I figured I should be able to decrease the size of the input. (you can. Twice the offset from the end is enough.) In the end I found the pattern, implemented it, and got the answer.
+
+Had it not worked, I would've tried to figure out where my pattern fails, and why. Once again: try on a small case, figure out where your approach fails, try to come up with a general way to solve your problem, then try it on the big case.
+
+
+
+level 1
+AVX-512
+3 points
+·
+2 months ago
+I came up with this by staring at sets of output, phase 0, phase1, phase 2, and looking for patterns
+
+I tried my own simple inputs like "0000000000" and "1111111111"
+
+when you do that some patterns become clear
+
+
+
+level 2
+Farbfetzen
+1 point
+·
+2 months ago
+Wow, using your own input to see patterns is a great idea.
+
+
+
+level 1
+fibonatic
+3 points
+·
+2 months ago
+Look at the structure of how the pattern is used. Which digit positions affect the value of the new digit at a given position after a single phase? What does this mean with respect to the offset?
+
+
+
+level 1
+aardvark1231
+1 point
+·
+2 months ago
+Thanks for this post, and all the replies. It really helped me to understand this a lot better! Finally got the solution after an off by one error where I was repeating the input 10,001 times and not 10,000 times. Interestingly though, examples 1 and 3, in part 2, worked correctly which was really throwing me off.

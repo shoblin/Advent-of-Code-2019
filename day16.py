@@ -63,22 +63,26 @@ def main():
     task_test1 = '12345678'
     task_test2 = list('03036732577212944063491565474664')
 
-##    task = fa.read_input_values('day16_puzzle_input.txt')
-##
-##    t = fft(task[0], 100)
-##    result = ''.join(map(str, t))
-##    print('Part1:', result)
+    task = fa.read_input_values('day16_puzzle_input.txt')
 
-    task_test2 = task_test2 * 10000
-    offset = int(''.join([str(d) for d in task_test2[:7]]))
-    task_list = task_test2[offset:]
-##    print(len(task_test2), offset)
+    t = fft(task[0], 100)
+    result = ''.join(map(str, t))
+    print('Part1:', result)
 
+    task = task[0] * 10000
+    offset = int(''.join([str(d) for d in task[:7]]))
 
-##        print(new_signal)
+    task_list = task[offset:]
+    task_list =[int(x) for x in task_list]
 
+    for iteration in range(100):
+        restsum = sum(task_list)
+        for i, n in enumerate(task_list):
+            task_list[i] = abs(restsum) % 10
+            restsum -= n
+    result = ''.join(str(n) for n in task_list[:8])
 
-##    print('Part 2: ', ''.join(map(str, task_test2[:8])))
+    print('Part 2: ',  result)
 
 
 
