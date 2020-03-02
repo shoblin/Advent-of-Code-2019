@@ -117,7 +117,7 @@ def calculate_path(map_code, bot_x, bot_y):
         x, y = current_position[0] + current_direction[0], current_position[1] + current_direction[1]
 
         if map_code[y][x] != 35:
-##            if
+            pass
 
         end_path = True
 
