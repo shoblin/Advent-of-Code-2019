@@ -176,7 +176,11 @@ def main():
     print('Part1: ', result1)
 
     bot_path = calculate_path(task_map_code, bot_x, bot_y)
-    print(bot_path)
+    txt_path = ''
+    for ch in bot_path:
+        txt_path += str(ch)
+
+    print(txt_path)
 
 
 if __name__ == '__main__':
