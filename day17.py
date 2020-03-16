@@ -98,7 +98,7 @@ def draw_map(map_code):
                 bot_x, bot_y = x, y
             x += 1
         y += 1
-        print(str_line)
+##        print(str_line)
     return bot_x, bot_y
 
 
@@ -107,7 +107,6 @@ def check_turn(bot_map, x, y):
     Check path
     '''
     return bot_map[y][x] == 35
-
 
 
 def calculate_path(map_code, bot_x, bot_y):
@@ -145,22 +144,47 @@ def calculate_path(map_code, bot_x, bot_y):
 
         if (0 <= rx <= max_x) and (0 <= ry <= max_y):
             if check_turn(map_code, rx, ry):
-                print('R')
                 bot_path.append('R')
                 current_direction = (current_direction - 1) % 4
                 continue
 
         if (0 <= lx <= max_x) and (0 <= ly <= max_y):
             if check_turn(map_code, lx, ly):
-                print('L')
                 bot_path.append('L')
                 current_direction = (current_direction + 1) % 4
                 continue
 
-        return (bot_path)
+        return bot_path
 
 
-    return bot_path
+def txt_path(bot_path):
+    '''
+    '''
+    txt_path = ''
+    for ch in bot_path:
+        txt_path += str(ch)
+
+    return txt_path
+
+
+def create_patterns(bot_path, patterns):
+    '''
+    '''
+    number_pattern = len(patterns)
+    num_symb_pattern =[1] * number_pattern
+    txt_pth = txt_path(bot_path)
+    patterns_dict = {}
+    pattern_start = 0
+
+    for patt_num in range(number_pattern):
+        while True:
+            pattern =
+
+
+
+
+
+
 
 def main():
     #Take optcode from file
@@ -176,11 +200,9 @@ def main():
     print('Part1: ', result1)
 
     bot_path = calculate_path(task_map_code, bot_x, bot_y)
-    txt_path = ''
-    for ch in bot_path:
-        txt_path += str(ch)
 
-    print(txt_path)
+    patterns = [A, B, C]
+    create_patterns()
 
 
 if __name__ == '__main__':
