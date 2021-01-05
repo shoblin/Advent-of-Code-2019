@@ -123,6 +123,7 @@ def calculate_path(map_code, bot_x, bot_y):
 
     bot_path = []
     step_count = 0
+##    draw_map(map_code)
 
     while True:
         x, y = current_position[0] + directions[current_direction][0], current_position[1] + directions[current_direction][1]
@@ -167,24 +168,18 @@ def txt_path(bot_path):
     return txt_path
 
 
-def create_patterns(bot_path, patterns):
-    '''
-    '''
-    number_pattern = len(patterns)
-    num_symb_pattern =[1] * number_pattern
-    txt_pth = txt_path(bot_path)
-    patterns_dict = {}
-    pattern_start = 0
-
-    for patt_num in range(number_pattern):
-        while True:
-            pattern =
-
-
-
-
-
-
+##def create_patterns(bot_path, patterns):
+##    '''
+##    '''
+##    number_pattern = len(patterns)
+##    num_symb_pattern =[1] * number_pattern
+##    txt_pth = txt_path(bot_path)
+##    patterns_dict = {}
+##    pattern_start = 0
+##
+####    for patt_num in range(number_pattern):
+####        while True:
+####            pattern =
 
 def main():
     #Take optcode from file
@@ -200,9 +195,10 @@ def main():
     print('Part1: ', result1)
 
     bot_path = calculate_path(task_map_code, bot_x, bot_y)
+    print(bot_path)
 
-    patterns = [A, B, C]
-    create_patterns()
+##    patterns = ['A', 'B', 'C']
+##    create_patterns()
 
 
 if __name__ == '__main__':
