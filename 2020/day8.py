@@ -52,7 +52,7 @@ def solution(lines):
     ended =False
 
     while move not in executed_moves and not ended:
-        num_move +=1
+
         executed_moves.append(move)
 
         instruction = lines[move]
@@ -70,7 +70,21 @@ def solution(lines):
 
 
 def solution2(lines):
+    '''
+    '''
+    for i in range(len(lines)):
+        current_lines = lines[:]
+        if current_lines[i][0] == 'jmp':
+            current_lines[i] = ['nop', current_lines[i][1]]
+        elif current_lines[i][0] == 'nop':
+            current_lines[i] = ['jmp', current_lines[i][1]]
 
+        tmp, acc = solution(current_lines)
+
+        if tmp:
+            break
+
+    return acc
 
 
 def main():
