@@ -25,7 +25,7 @@ def main():
 ##    print(data)
     for nxt_jolt in data:
         delta = nxt_jolt - curr_jolt
-        print(curr_jolt, nxt_jolt, delta)
+##        print(curr_jolt, nxt_jolt, delta)
         if delta == 1:
             jolts_1 += 1
         elif delta == 3:
@@ -33,8 +33,19 @@ def main():
 
         curr_jolt = nxt_jolt
 
-    print (jolts_1, jolts_3 ,jolts_1 * jolts_3)
+    print ('Solution part1:',jolts_1 * jolts_3)
 
+    sol = {0:1}
+    for line in data:
+        sol[line] = 0
+        if line - 1 in sol:
+            sol[line] += sol[line - 1]
+        if line - 2 in sol:
+            sol[line] += sol[line - 2]
+        if line - 3 in sol:
+            sol[line] += sol[line - 3]
+
+    print(sol[max(data)])
 
 if __name__ == '__main__':
     main()
